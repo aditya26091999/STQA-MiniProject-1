@@ -15,6 +15,11 @@ import javafx.stage.Stage;
  *
  * @author Siddharth
  */
+
+/**
+ *  THIS IS THE ENTRY POINT OF THE PROGRAM. I've set this class as the main class in the project's classpath. 
+ *
+ */
 public class MainClass extends Application{
 
     @Override

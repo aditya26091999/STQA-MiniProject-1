@@ -28,6 +28,11 @@ import javafx.stage.Stage;
  *
  * @author Siddharth
  */
+
+/**
+ * THE BELOW TEXTFIELDS AND BUTTONS ARE A PART OF LOGIN PAGE. THE FXML FILE AUTOMATICALLY GENERATES THE METHODS AND VARIABLES WHENEVER THE 
+ * SCENE BUILDER IS UPDATED. YOU JUST NEED TO RIGHT CLICK THE FXML DOC AND CLICK ADD CONTROLLER FOR THE FXML DOC.
+ */
 public class AppTwoFXMLController implements Initializable {
 
     @FXML
@@ -47,13 +52,15 @@ public class AppTwoFXMLController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {//ignore this method
         // TODO
     }
 
-    @FXML
+    @FXML   //this is the method that'll be called when user presses login button on the ADMIN side
     private void adminLogin(ActionEvent event) {
 
         String admineml = adminEmail.getText();
@@ -63,7 +70,7 @@ public class AppTwoFXMLController implements Initializable {
         }
     }
 
-    @FXML
+    @FXML   ///this is the method that'll be called when user presses login button on the USER side
     private void userLogin(ActionEvent event) {
         String usereml = userEmail.getText();
         String userpwd = userPass.getText();
@@ -73,7 +80,7 @@ public class AppTwoFXMLController implements Initializable {
         }
     }
 
-    @FXML
+    @FXML   //this method will be called when user presses the CREATE ACCOUNT button on the USER side.
     private void createAccn(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/FXMLpack/RegistrationFXML.fxml")); //load the registration page FXML file for view
