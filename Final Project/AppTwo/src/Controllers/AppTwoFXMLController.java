@@ -76,7 +76,7 @@ public class AppTwoFXMLController implements Initializable {
         String userpwd = userPass.getText();
         //System.out.println("User email: "+usereml+" User password: "+userpwd);
         if(usereml.isEmpty() && userpwd.isEmpty()){
-            userLogBtn.setOnAction(e->ErrClass.ErrBox("Empty Fields", "You left some fields empty!"));
+            ErrClass.ErrBox("Empty Fields", "You left some fields Empty!");
         }
     }
 
