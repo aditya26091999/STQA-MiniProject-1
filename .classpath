@@ -4,6 +4,6 @@
 	<classpathentry kind="src" path="Final Project/AppTwo/src"/>
 	<classpathentry kind="lib" path="Final Project/AppTwo/dist/AppTwo.jar"/>
 	<classpathentry kind="lib" path="Final Project/AppTwo/dist/lib/jfoenix-8.0.10.jar"/>
-	<classpathentry kind="lib" path="D:/Installs/sqllite/sqlite-jdbc-3.7.2.jar"/>
+	<classpathentry kind="lib" path="D:/Study/Languages/java/libraries/sqlite-jdbc-3.7.2.jar"/>
 	<classpathentry kind="output" path="Final Project/AppTwo/build/classes"/>
 </classpath>
