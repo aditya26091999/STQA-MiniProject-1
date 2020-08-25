@@ -66,8 +66,8 @@ public class AppTwoFXMLController implements Initializable {
         String admineml = adminEmail.getText();
         String admpwd = adminPass.getText();
         if(admineml.isEmpty() || admpwd.isEmpty()){
-            adminLogBtn.setOnAction(e->ErrClass.ErrBox("Empty Fields", "You left some fields empty!"));
-        }
+        	ErrClass.ErrBox("Empty Fields", "You left some fields empty!");
+        } 
     }
 
     @FXML   ///this is the method that'll be called when user presses login button on the USER side
@@ -76,7 +76,23 @@ public class AppTwoFXMLController implements Initializable {
         String userpwd = userPass.getText();
         //System.out.println("User email: "+usereml+" User password: "+userpwd);
         if(usereml.isEmpty() && userpwd.isEmpty()){
-            userLogBtn.setOnAction(e->ErrClass.ErrBox("Empty Fields", "You left some fields empty!"));
+        	ErrClass.ErrBox("Empty Fields", "You left some fields empty!");
+        }
+        /**
+         * Ive created this else block to test the userDashboard screen. You have to fetch data from the sqlite
+         * and compare it with the login info entered. this was done just for test. if you want to have a look 
+         * then try entering anything and you'll be directed to the user dashboard screen.
+         */
+        else {
+        	try {
+                Parent root = FXMLLoader.load(getClass().getResource("/FXMLpack/UserDashboardFXML.fxml")); //load the registration page FXML file for view
+                Stage stage = (Stage)userLogBtn.getScene().getWindow();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                Logger.getLogger(AppTwoFXMLController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -87,7 +103,6 @@ public class AppTwoFXMLController implements Initializable {
             Stage stage = (Stage)userPass.getScene().getWindow();
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            //stage.setMaximized(true);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(AppTwoFXMLController.class.getName()).log(Level.SEVERE, null, ex);
