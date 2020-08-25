@@ -8,6 +8,9 @@ package Controllers;
 import alertBoxes.ErrClass;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -57,6 +60,15 @@ public class RegistrationFXMLController implements Initializable {
         // TODO
     }    
 
+    //kawale added this
+    private void clearFields() {
+        fnameField.clear();
+        lnameField.clear();
+        emailField.clear();
+        pwdField.clear();
+        confirmPwdField.clear();
+    }
+    
     @FXML   //this method will be called when user clicks the 'CREATE ACCOUNT' button
     private void createAcnt(ActionEvent event) {
         String ufname = fnameField.getText();
@@ -65,7 +77,53 @@ public class RegistrationFXMLController implements Initializable {
         String upwd = pwdField.getText();
         String ucpwd = confirmPwdField.getText();
         if (ufname.isEmpty() || ulname.isEmpty() || uemail.isEmpty() || upwd.isEmpty() || ucpwd.isEmpty()){
-            createAccntBtn.setOnAction(e->ErrClass.ErrBox("ERROR", "You left some fields blank!")); //this code will call an error dialog box if any of the fields are left blank
+        	
+        	//give error pop-up
+        	ErrClass.ErrBox("Error","Fields are empty!");
+            
+        }
+        else if (!upwd.equals(ucpwd)) {
+        	
+        	//clear the confirm-password field
+        	// give error pop-up
+        	confirmPwdField.clear();
+        	ErrClass.ErrBox("Error","Passwords don't match!");  	
+        }
+        else {
+        	// code to get authenticate the customer from db
+        	String url = "jdbc:sqlite:F:/000-CollegePracticals/STQA-MiniProject-1/Final Project/Database/airline.db";
+        	try{
+        		
+        		//using the sqlite driver in the class-path
+        		Class.forName("org.sqlite.JDBC");
+        		
+        		//Connection object to connect to embedded db
+        		Connection conn = DriverManager.getConnection(url);
+        		
+        		
+        		//Creating a statement object to hold query
+        		String add_customer = "insert into customer(fname,lname,email,password) values(?,?,?,?);";
+        		
+        		PreparedStatement stmt = conn.prepareStatement(add_customer);
+        		stmt.setString(1,ufname);
+        		stmt.setString(2,ulname);
+        		stmt.setString(3,uemail);
+        		stmt.setString(4,upwd);
+        		stmt.executeUpdate();
+        		
+        		//logic to show successful registration
+        		// create a pop-up that assures customer that
+        		// he is registered on system and redirect him
+        		// to the login page.
+        		System.out.println("Added User!");
+        		
+        		
+        	}catch(Exception e){
+        		// logic to show error while filling data to db
+        		// show error pop-up and clear the values of form
+        		System.out.println("Error" + e);
+        	}
+        	
         }
     }
 
