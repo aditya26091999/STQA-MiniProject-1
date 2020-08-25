@@ -6,6 +6,8 @@
 package Controllers;
 
 import alertBoxes.ErrClass;
+import alertBoxes.NotifyBox;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -91,14 +93,15 @@ public class RegistrationFXMLController implements Initializable {
         }
         else {
         	// code to get authenticate the customer from db
-        	String url = "jdbc:sqlite:F:/000-CollegePracticals/STQA-MiniProject-1/Final Project/Database/airline.db";
+        	//String url = "jdbc:sqlite:F:/000-CollegePracticals/STQA-MiniProject-1/Final Project/Database/airline.db";
+        	String urlTest = "jdbc:sqlite:E:/projects/TestDatabases/airline.db";
         	try{
         		
         		//using the sqlite driver in the class-path
         		Class.forName("org.sqlite.JDBC");
         		
         		//Connection object to connect to embedded db
-        		Connection conn = DriverManager.getConnection(url);
+        		Connection conn = DriverManager.getConnection(urlTest);
         		
         		
         		//Creating a statement object to hold query
@@ -116,6 +119,7 @@ public class RegistrationFXMLController implements Initializable {
         		// he is registered on system and redirect him
         		// to the login page.
         		System.out.println("Added User!");
+        		NotifyBox.NotificationBox("Registration Successful", "You are now a Registered User!");
         		
         		
         	}catch(Exception e){
