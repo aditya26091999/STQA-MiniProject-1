@@ -19,9 +19,6 @@ public class UserDashboardFXMLController {
     private DatePicker departDate;
 
     @FXML
-    private DatePicker arrDate;
-
-    @FXML
     private Button SearchFlightBtn;
 
     @FXML
@@ -32,7 +29,6 @@ public class UserDashboardFXMLController {
         	String dateDepart = "";
         	String dateArriv = "";
         	dateDepart = departDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString();
-        	dateArriv = arrDate.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")).toString();
         	
         	if(source.isEmpty() || dest.isEmpty()) {
         		ErrClass.ErrBox("Missing Fields", "You left some fields Blank!");

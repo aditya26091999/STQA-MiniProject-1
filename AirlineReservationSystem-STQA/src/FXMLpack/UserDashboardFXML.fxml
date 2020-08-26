@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="534.0" prefWidth="750.0" style="-fx-background-color: #DAE0E2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.UserDashboardFXMLController">
    <children>
       <Label layoutX="139.0" layoutY="112.0" prefHeight="26.0" prefWidth="138.0" text="Source City" AnchorPane.leftAnchor="120.0" AnchorPane.topAnchor="100.0">
@@ -25,15 +24,9 @@
             <Font name="Consolas Bold" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="120.0" layoutY="282.0" prefHeight="26.0" prefWidth="138.0" text="Arrival Date">
-         <font>
-            <Font name="Consolas Bold" size="15.0" />
-         </font>
-      </Label>
       <TextField fx:id="sourceTxtField" layoutX="273.0" layoutY="101.0" prefHeight="26.0" prefWidth="199.0" />
       <TextField fx:id="destTxtField" layoutX="273.0" layoutY="161.0" prefHeight="26.0" prefWidth="199.0" />
       <DatePicker fx:id="departDate" layoutX="273.0" layoutY="224.0" />
-      <DatePicker fx:id="arrDate" layoutX="273.0" layoutY="282.0" />
       <Button fx:id="SearchFlightBtn" layoutX="297.0" layoutY="398.0" mnemonicParsing="false" onAction="#SearchFlights" prefHeight="44.0" prefWidth="150.0" style="-fx-background-color: #A3CB37;" text="Search Flights">
          <font>
             <Font name="Consolas Bold" size="15.0" />
