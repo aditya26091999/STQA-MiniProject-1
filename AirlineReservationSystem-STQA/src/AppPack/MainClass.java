@@ -5,6 +5,10 @@
  */
 package AppPack;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+import alertBoxes.ErrClass;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,6 +36,28 @@ public class MainClass extends Application{
         stage.show();
     }
     
+    
+    //Kawale's section
+    //To create a global-db connection object which is accessible throughout
+    // application-use
+    
+    public static Connection dbConnection() {
+    	String url = "jdbc:sqlite:./Database/airline.db";
+    	try{
+    		
+    		//using the sqlite driver in the class-path
+    		Class.forName("org.sqlite.JDBC");
+  
+    		//Connection object to connect to embedded db
+    		Connection conn = DriverManager.getConnection(url);
+    		return conn;
+    	}
+    	catch(Exception e) {
+    		ErrClass.ErrBox("DB-Error", "Connection to Database failed");
+    		return null;
+    	}
+    	
+    }
     public static void main(String[] args) {
         launch(args);
     }

@@ -16,6 +16,8 @@ import java.sql.PreparedStatement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import AppPack.MainClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -93,21 +95,12 @@ public class RegistrationFXMLController implements Initializable {
         }
         else {
         	// code to get authenticate the customer from db
-        	String url = "jdbc:sqlite:./Database/airline.db";
-//        	String urlTest = "jdbc:sqlite:E:/projects/TestDatabases/airline.db";
         	try{
-        		
-        		//using the sqlite driver in the class-path
-        		Class.forName("org.sqlite.JDBC");
-        		
-        		//Connection object to connect to embedded db
-        		Connection conn = DriverManager.getConnection(url);
-        		
         		
         		//Creating a statement object to hold query
         		String add_customer = "insert into customer(fname,lname,email,password) values(?,?,?,?);";
         		
-        		PreparedStatement stmt = conn.prepareStatement(add_customer);
+        		PreparedStatement stmt = MainClass.dbConnection().prepareStatement(add_customer);
         		stmt.setString(1,ufname);
         		stmt.setString(2,ulname);
         		stmt.setString(3,uemail);

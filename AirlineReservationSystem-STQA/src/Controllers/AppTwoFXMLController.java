@@ -7,11 +7,17 @@ package Controllers;
 
 
 import alertBoxes.ErrClass;
+import alertBoxes.NotifyBox;
+
 import java.io.IOException;
 import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import AppPack.MainClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -71,11 +77,11 @@ public class AppTwoFXMLController implements Initializable {
     }
 
     @FXML   ///this is the method that'll be called when user presses login button on the USER side
-    private void userLogin(ActionEvent event) {
+    private void userLogin(ActionEvent event) throws Exception{
         String usereml = userEmail.getText();
         String userpwd = userPass.getText();
         //System.out.println("User email: "+usereml+" User password: "+userpwd);
-        if(usereml.isEmpty() && userpwd.isEmpty()){
+        if(usereml.isEmpty() || userpwd.isEmpty()){
         	ErrClass.ErrBox("Empty Fields", "You left some fields empty!");
         }
         /**
@@ -84,12 +90,26 @@ public class AppTwoFXMLController implements Initializable {
          * then try entering anything and you'll be directed to the user dashboard screen.
          */
         else {
-        	try {
-                Parent root = FXMLLoader.load(getClass().getResource("/FXMLpack/UserDashboardFXML.fxml")); //load the registration page FXML file for view
+        	
+          	try {
+            	String searchCustomer = "select fname,lname from customer where email=? and password=?";
+            	PreparedStatement stmt = MainClass.dbConnection().prepareStatement(searchCustomer);
+            	stmt.setString(1, usereml);
+            	stmt.setString(2, userpwd);
+            	ResultSet rs = stmt.executeQuery();
+            	
+            	if (rs.next()!=false) {
+            	
+            	NotifyBox.NotificationBox("Successful-Login", "Welcome User,You are valuable to us!");
+          		Parent root = FXMLLoader.load(getClass().getResource("/FXMLpack/UserDashboardFXML.fxml")); //load the registration page FXML file for view
                 Stage stage = (Stage)userLogBtn.getScene().getWindow();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
+            	}
+            	else {
+            		ErrClass.ErrBox("Login-Error", "Wrong Credentials");
+            	}
             } catch (IOException ex) {
                 Logger.getLogger(AppTwoFXMLController.class.getName()).log(Level.SEVERE, null, ex);
             }
