@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,13 +69,49 @@ public class AppTwoFXMLController implements Initializable {
     }
 
     @FXML   //this is the method that'll be called when user presses login button on the ADMIN side
-    private void adminLogin(ActionEvent event) {
+    private void adminLogin(ActionEvent event) throws IOException {
 
         String admineml = adminEmail.getText();
         String admpwd = adminPass.getText();
+        int flag = 0;
         if(admineml.isEmpty() || admpwd.isEmpty()){
         	ErrClass.ErrBox("Empty Fields", "You left some fields empty!");
-        } 
+        }
+        /**
+         * ADDED ELSE BLOCK TO VALIDATE ADMIN CREDENTIALS 
+         */
+        else {
+        	String sql = "SELECT email, password FROM admin";
+        	try {
+    			Statement stmt = MainClass.dbConnection().createStatement();
+    			ResultSet rs = stmt.executeQuery(sql);
+    			while(rs.next()) {
+    				String email = rs.getString("email");
+    				String pwd = rs.getString("password");
+    				//String fname = rs.getString("fname");
+    				if(email.equals(admineml) && pwd.equals(admpwd)) {
+    					NotifyBox.NotificationBox("Login Successful", "Welcome Admin");
+    					flag = 1;
+    					break;
+    				}
+    			}
+    			if(flag==0) {
+    				ErrClass.ErrBox("Error", "Incorrect Credentials");
+    			}
+    			else if(flag == 1) {
+    				//ADMIN DASHBOARD CODE GOES HERE
+    				Parent root = FXMLLoader.load(getClass().getResource("/FXMLpack/AdminDashboardFXML.fxml")); //load the AdminDash FXML file for view
+                    Stage stage = (Stage)adminLogBtn.getScene().getWindow();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+    			}
+    		} catch (SQLException e) {
+    			// TODO Auto-generated catch block
+    			e.printStackTrace();
+    		}
+        }
+        
     }
 
     @FXML   ///this is the method that'll be called when user presses login button on the USER side
