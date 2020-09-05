@@ -1,21 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="700.0" style="-fx-background-color: #D6A2E8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminDashboardFXMLController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="559.0" prefWidth="990.0" style="-fx-background-color: #CAD3C8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AdminDashboardFXMLController">
    <children>
-      <Label alignment="CENTER" layoutX="253.0" layoutY="192.0" prefHeight="46.0" prefWidth="193.0" text="Work In Progress" textAlignment="CENTER">
-         <font>
-            <Font name="Consolas Bold" size="19.0" />
-         </font>
-      </Label>
-      <Button fx:id="ExitBtn" layoutX="279.0" layoutY="297.0" mnemonicParsing="false" onAction="#ExitAct" prefHeight="36.0" prefWidth="142.0" style="-fx-background-color: #B33771;" text="EXIT" textFill="#dac1c1">
-         <font>
-            <Font name="Consolas Bold" size="17.0" />
-         </font>
-      </Button>
+      <VBox prefHeight="559.0" prefWidth="224.0" style="-fx-background-color: #2C3A47;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="adminCtrBtn" mnemonicParsing="false" onAction="#AdminEdit" prefHeight="46.0" prefWidth="207.0" style="-fx-background-color: #BDC581;" text="ADD/REMOVE Admin" textFill="#231b1b">
+               <VBox.margin>
+                  <Insets left="8.0" right="5.0" top="125.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Consolas Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="adminFlightBtn" mnemonicParsing="false" onAction="#FlightEdit" prefHeight="46.0" prefWidth="207.0" style="-fx-background-color: #BDC581;" text="ADD/REMOVE Flights" textFill="#231b1b">
+               <VBox.margin>
+                  <Insets left="8.0" right="5.0" top="55.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Consolas Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="adminViewClientBtn" mnemonicParsing="false" onAction="#ViewClient" prefHeight="46.0" prefWidth="207.0" style="-fx-background-color: #BDC581;" text="View Clients" textFill="#231b1b">
+               <VBox.margin>
+                  <Insets left="8.0" right="5.0" top="55.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Consolas Bold" size="16.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
